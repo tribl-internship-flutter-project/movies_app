@@ -1,15 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_player/youtube_player.dart';
 import '../components/rating.dart';
 import '../components/actors_list.dart';
 
-class SingleMoviePage extends StatelessWidget {
+class SingleMoviePage extends StatefulWidget {
   final movie;
 
-  SingleMoviePage({ this.movie });
+  SingleMoviePage({Key key, this.movie}) : super(key: key);
+
+  @override
+  _SingleMoviePageState createState() => _SingleMoviePageState();
+}
+
+class _SingleMoviePageState extends State<SingleMoviePage> {
+   VideoPlayerController _controller;
+
+
+  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          final _statusBarHeight = MediaQuery.of(context).padding.top + 20.0;
+          return SafeArea(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: _statusBarHeight, right: 16 ),
+                alignment: Alignment.centerRight,
+                child: Material(
+                  color: Colors.transparent,
+                  child: IconButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.close, size: 40, color: Colors.white,),
+                  ),
+                )
+              ),
+              Flexible(
+                child: Center(
+                  child: Container(
+                    child: YoutubePlayer(
+                      context: context,
+                      source: widget.movie['videoId'],
+                      quality: YoutubeQuality.HIGH,
+                      callbackController: (controller) {
+                        _controller = controller;
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );},
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(movie);
+    print(widget.movie);
+    final movie = widget.movie;
     final double _statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       backgroundColor: Color.fromRGBO(44, 56, 72, 1),
@@ -43,7 +94,9 @@ class SingleMoviePage extends StatelessWidget {
                   )),
             ),
             // bottom part
-            Flexible(child: SingleMoviePageBottom(movie: movie))
+            Flexible(
+                child:
+                    SingleMoviePageBottom(movie: movie, showMovie: _showDialog))
           ],
         ),
       ),
@@ -53,8 +106,9 @@ class SingleMoviePage extends StatelessWidget {
 
 class SingleMoviePageBottom extends StatelessWidget {
   final movie;
+  final showMovie;
 
-  SingleMoviePageBottom({ this.movie });
+  SingleMoviePageBottom({this.movie, this.showMovie});
 
   @override
   Widget build(BuildContext context) {
@@ -81,10 +135,13 @@ class SingleMoviePageBottom extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showMovie();
+                      },
                       child: Text('Watch Now'),
                       textColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
                       color: Color.fromRGBO(255, 255, 255, 0.3),
                     ),
                     Rating(size: 20)
@@ -95,20 +152,34 @@ class SingleMoviePageBottom extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 16),
                 child: Text(
                   'In 1985 Maine, lighthouse keeper Thomas Curry rescues Atlanna, the queen of the underwater nation of Atlantis, during a storm. They eventually fall in love and have a son named Arthur, who is born with the power to communicate with marine lifeforms. ',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 0.7), height: 1.5),
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      color: Color.fromRGBO(255, 255, 255, 0.7),
+                      height: 1.5),
                 ),
               ),
-              Container(child: ActorsList(), margin: const EdgeInsets.only(bottom: 16)),
+              Container(
+                  child: ActorsList(),
+                  margin: const EdgeInsets.only(bottom: 16)),
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 child: Row(
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.only(right: 8),
-                      child: Text('Studio', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.bold),),
+                      child: Text(
+                        'Studio',
+                        style: TextStyle(
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    Text('Warner Bros', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.7)),)
-
+                    Text(
+                      'Warner Bros',
+                      style:
+                          TextStyle(color: Color.fromRGBO(255, 255, 255, 0.7)),
+                    )
                   ],
                 ),
               ),
@@ -118,9 +189,18 @@ class SingleMoviePageBottom extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.only(right: 8),
-                      child: Text('Genre', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.bold),),
+                      child: Text(
+                        'Genre',
+                        style: TextStyle(
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    Text('Action, Adventure, Fantasy', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.7)),)
+                    Text(
+                      'Action, Adventure, Fantasy',
+                      style:
+                          TextStyle(color: Color.fromRGBO(255, 255, 255, 0.7)),
+                    )
                   ],
                 ),
               ),
@@ -128,9 +208,17 @@ class SingleMoviePageBottom extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.only(right: 8),
-                    child: Text('Release', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.bold),),
+                    child: Text(
+                      'Release',
+                      style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  Text('2018', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.7)),)
+                  Text(
+                    '2018',
+                    style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.7)),
+                  )
                 ],
               )
             ],
@@ -138,3 +226,5 @@ class SingleMoviePageBottom extends StatelessWidget {
     );
   }
 }
+
+
