@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-//import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:youtube_player/youtube_player.dart';
 import '../components/rating.dart';
 import '../components/actors_list.dart';
@@ -15,26 +13,8 @@ class SingleMoviePage extends StatefulWidget {
 }
 
 class _SingleMoviePageState extends State<SingleMoviePage> {
-//  YoutubePlayerController _controller = YoutubePlayerController();
-// var youtube = new FlutterYoutube();
    VideoPlayerController _controller;
 
-  String _playerStatus = "";
-  String _errorCode = '0';
-
-
-
-//  void listener() {
-//    if (_controller.value.playerState == PlayerState.ENDED) {
-//      print('Thank you sir');
-//    }
-//    if (mounted) {
-////      setState(() {
-////        _playerStatus = _controller.value.playerState.toString();
-////        _errorCode = _controller.value.errorCode.toString();
-////      });
-//    }
-//  }
 
   void _showDialog() {
     showDialog(

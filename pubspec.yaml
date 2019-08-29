@@ -20,8 +20,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-#  flutter_youtube: "^1.1.6"
-#  youtube_player_flutter: ^4.1.0
   youtube_player: ^3.5.0
 
   # The following adds the Cupertino Icons font to your application.
