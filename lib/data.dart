@@ -22,38 +22,38 @@ const DATA = [
   },
   {
     'id': 4,
-    'title': "Avenger's Endgame",
+    'title': "Angel Has Fallen",
     'rating': 4.0,
-    'image': 'assets/movie1.png',
-    'videoId': 'ee1172yeqyE',
+    'image': 'assets/movie4.png',
+    'videoId': 'XF8h3hOGBJM',
   },
   {
     'id': 5,
-    'title': "Aquaman",
+    'title': "Black Panther",
     'rating': 4.0,
-    'image': 'assets/movie2.png',
-    'videoId': 'WDkg3h8PCVU',
+    'image': 'assets/movie8.png',
+    'videoId': 'xjDjIWPwcPU'
   },
   {
     'id': 6,
-    'title': 'Spiderman Homecoming',
+    'title': "John Wick: Chapter 3 - Parabellum",
     'rating': 4.0,
-    'image': 'assets/movie3.png',
-    'videoId': 'n9DwoQ7HWvI'
+    'image': 'assets/movie7.png',
+    'videoId': 'pU8-7BX9uxs',
   },
   {
     'id': 7,
-    'title': "Avenger's Endgame",
+    'title': "Hobbs & Shaw",
     'rating': 4.0,
-    'image': 'assets/movie1.png',
-    'videoId': 'n9DwoQ7HWvI'
+    'image': 'assets/movie5.png',
+    'videoId': 'HZ7PAyCDwEg',
   },
   {
     'id': 8,
-    'title': "Aquaman",
+    'title': 'Alita Battle Angel',
     'rating': 4.0,
-    'image': 'assets/movie2.png',
-    'videoId': 'n9DwoQ7HWvI'
+    'image': 'assets/movie6.png',
+    'videoId': 'cislZ9S0ocA'
   },
   {
     'id': 9,
